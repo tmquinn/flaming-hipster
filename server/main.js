@@ -12,8 +12,6 @@ mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/test');
 var Startup = mongoose.model('Startup', { time: Date });
 Startup.find(function (err, startups) {
     if (err) console.log('err', err);
-
-    console.log(startups);
 });
 
 var currentStartup = new Startup({ time: new Date() });
@@ -21,7 +19,13 @@ currentStartup.save(function (err) {
     console.log('Current Startup Time Saved');
 });
 
-server.get(/\/*/, restify.serveStatic({
+server.get('/v', function (request, response, next) {
+    response.send({success: false});
+
+    return next();
+});
+
+server.get(/\/[^v]?.*/, restify.serveStatic({
     directory: './client',
     default: 'index.html'
 }));
