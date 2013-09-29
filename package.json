@@ -1,8 +1,9 @@
 {
     "name": "flaming-hipster",
     "version": "0.0.1",
-    "dependencies": {
-        "restify": "~2.6.0"
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tmquinn/flaming-hipster.git"
     },
     "engines": {
         "node": "0.10.x",
