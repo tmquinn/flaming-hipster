@@ -21,8 +21,8 @@ currentStartup.save(function (err) {
     console.log('Current Startup Time Saved');
 });
 
-server.get('/', restify.serveStatic({
-    directory: './static/html',
+server.get(/\/*/, restify.serveStatic({
+    directory: './client',
     default: 'index.html'
 }));
 
