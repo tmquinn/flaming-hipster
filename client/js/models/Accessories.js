@@ -7,7 +7,6 @@ define(['ember-data'], function () {
         name: DS.attr('string')
     });
 
-    App.AccessoriesAdapter = DS.RESTAdapter.extend();
 
     App.Accessories.FIXTURES = [
         { id: 0, name: 'Fedora' },

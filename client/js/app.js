@@ -22,6 +22,12 @@ require(['ember-data'], function () {
     App = Ember.Application.create();
     App.deferReadiness();
 
+    DS.RESTAdapter.reopen({
+        namespace: 'api/v1'
+    });
+
+    App.AccessoriesAdapter = DS.RESTAdapter.extend();
+
     App.Router.map(function () {
         // put your routes here
     });

@@ -9,9 +9,9 @@ var server = restify.createServer();
 
 mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/test');
 
-var collections = {}
+var collections = {};
 
-var Startup = collections.startup = mongoose.model('Startup', { time: Date });
+var Startup = collections.startups = mongoose.model('Startup', { time: Date });
 
 Startup.find(function (err, startups) {
     if (err) console.log('err', err);
@@ -25,13 +25,21 @@ currentStartup.save(function (err) {
 server.get('/api/:version/:collection', function (request, response, next) {
 
     collections[request.params.collection].find(function (err, results) {
+
+        var transResult = [];
+
+        results.forEach(function (obj) {
+            var transObj = {
+                id: obj._id,
+                time: obj.time
+            };
+            transResult.push(transObj);
+        });
+
         response.send({
-            success: false,
-            version: request.params.version,
-            results: results
+            startup: transResult
         });
     });
-
 
     return next();
 });
