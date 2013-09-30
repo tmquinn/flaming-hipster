@@ -9,7 +9,10 @@ var server = restify.createServer();
 
 mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/test');
 
-var Startup = mongoose.model('Startup', { time: Date });
+var collections = {}
+
+var Startup = collections.startup = mongoose.model('Startup', { time: Date });
+
 Startup.find(function (err, startups) {
     if (err) console.log('err', err);
 });
@@ -19,17 +22,24 @@ currentStartup.save(function (err) {
     console.log('Current Startup Time Saved');
 });
 
-server.get('/v', function (request, response, next) {
-    response.send({success: false});
+server.get('/api/:version/:collection', function (request, response, next) {
+
+    collections[request.params.collection].find(function (err, results) {
+        response.send({
+            success: false,
+            version: request.params.version,
+            results: results
+        });
+    });
+
 
     return next();
 });
 
-server.get(/\/[^v]?.*/, restify.serveStatic({
+server.get(/\/?.*/, restify.serveStatic({
     directory: './client',
     default: 'index.html'
 }));
-
 
 
 server.listen(process.env.PORT || 8080, function () {
