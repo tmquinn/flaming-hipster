@@ -33,9 +33,9 @@ App.Router.map(function () {
 });
 
 require([
-    'routes/HipsterAddRoute',
-    'controllers/HipsterFindController',
-    'views/HipsterFindView'
+    'HipsterAddRoute',
+    'HipsterFindController',
+    'HipsterFindView'
 ], function () {
     App.advanceReadiness();
 });

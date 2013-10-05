@@ -1,7 +1,7 @@
 /**
  * Created by quinn on 10/4/13.
  */
-define(['models/HipsterModel'], function () {
+define(['HipsterModel'], function () {
     App.HipsterAddController = Ember.ObjectController.extend({
 
         actions: {
