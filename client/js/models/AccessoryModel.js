@@ -1,14 +1,13 @@
 /**
  * Created by quinn on 9/29/13.
  */
-define(['ember-data'], function () {
+define([], function () {
 
-    App.Accessories = DS.Model.extend({
+    App.Accessory = DS.Model.extend({
         name: DS.attr('string')
     });
 
-
-    App.Accessories.FIXTURES = [
+    App.Accessory.FIXTURES = [
         { id: 0, name: 'Fedora' },
         { id: 1, name: 'Glasses' },
         { id: 2, name: 'Beard' }

@@ -15,13 +15,19 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="index">
-    <ul>
-        {{#each item in model}}
-        <li>{{item.time}}</li>
-        {{/each}}
-    </ul>
+    {{#linkTo "hipster"}}Add Hipster{{/linkTo}}
 </script>
 
+<script type="text/x-handlebars" data-template-name="hipster">
+    {{input placeholder="First Name" valueBinding="firstName"}}
+    {{input placeholder="Last Name" valueBinding="lastName"}}
+    <button type="button" {{action "createNewRecord"}}>Create</button>
+</script>
+
+<script src="js/libs/jquery-1.9.1.js"></script>
+<script src="js/libs/handlebars-1.0.0.js"></script>
+<script src="js/libs/ember-1.0.0.js"></script>
+<script src="js/libs/ember-data.js"></script>
 <script src="js/libs/require.js" data-main="js/app.js"></script>
 </body>
 </html>

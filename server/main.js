@@ -2,6 +2,8 @@
  * Created by quinn on 9/29/13.
  */
 
+console.log(process.env.ENV);
+
 var restify = require('restify');
 var mongoose = require('mongoose');
 
@@ -12,15 +14,17 @@ mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/test');
 var collections = {};
 
 var Startup = collections.startups = mongoose.model('Startup', { time: Date });
-
-Startup.find(function (err, startups) {
-    if (err) console.log('err', err);
+var Hipsters = collections.hipsters = mongoose.model('Hipsters', {
+    firstName: String,
+    lastName: String
 });
 
 var currentStartup = new Startup({ time: new Date() });
 currentStartup.save(function (err) {
     console.log('Current Startup Time Saved');
 });
+
+server.use(restify.bodyParser());
 
 server.get('/api/:version/:collection', function (request, response, next) {
 
@@ -39,6 +43,21 @@ server.get('/api/:version/:collection', function (request, response, next) {
         response.send({
             startup: transResult
         });
+    });
+
+    return next();
+});
+
+server.post('/api/:version/:collection', function (request, response, next) {
+    var newHipster = new Hipsters({
+        firstName: request.context.hipster.firstName,
+        lastName: request.context.hipster.lastName
+    });
+
+    newHipster.save(function (err, savedObj) {
+        response.send({
+            hipster: savedObj
+        })
     });
 
     return next();
