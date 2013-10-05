@@ -1,8 +1,8 @@
+/* globals require, process */
+
 /**
  * Created by quinn on 9/29/13.
  */
-
-console.log(process.env.ENV);
 
 var restify = require('restify');
 var mongoose = require('mongoose');
@@ -25,24 +25,18 @@ currentStartup.save(function (err) {
 });
 
 server.use(restify.bodyParser());
+server.use(restify.queryParser());
 
 server.get('/api/:version/:collection', function (request, response, next) {
+    "use strict";
 
-    collections[request.params.collection].find(function (err, results) {
+    collections[request.params.collection].find(request.query, function (err, results) {
+        console.log('query', request.query, results);
 
-        var transResult = [];
+        var restResponse = {};
+        restResponse[request.params.collection] = results;
 
-        results.forEach(function (obj) {
-            var transObj = {
-                id: obj._id,
-                time: obj.time
-            };
-            transResult.push(transObj);
-        });
-
-        response.send({
-            startup: transResult
-        });
+        response.send(restResponse);
     });
 
     return next();
@@ -57,7 +51,7 @@ server.post('/api/:version/:collection', function (request, response, next) {
     newHipster.save(function (err, savedObj) {
         response.send({
             hipster: savedObj
-        })
+        });
     });
 
     return next();

@@ -15,13 +15,30 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name="index">
-    {{#linkTo "hipster"}}Add Hipster{{/linkTo}}
+    <ul>
+        <li>{{#linkTo "hipster.add"}}Add Hipster{{/linkTo}}</li>
+        <li>{{#linkTo "hipster.find"}}Find Hipster{{/linkTo}}</li>
+    </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="hipster">
+<script type="text/x-handlebars" data-template-name="hipster/add">
     {{input placeholder="First Name" valueBinding="firstName"}}
     {{input placeholder="Last Name" valueBinding="lastName"}}
     <button type="button" {{action "createNewRecord"}}>Create</button>
+</script>
+
+<script type="text/x-handlebars" data-template-name="hipster/find">
+    {{input placeholder="First Name" valueBinding="firstName" id="first-name"}}
+    {{input placeholder="Last Name" valueBinding="lastName"}}
+    <button type="button" {{action "findHipsters"}}>Find</button>
+    {{#if searchResults}}
+    <h2>Hipsters Found!</h2>
+    <ul>
+    {{#each searchResults}}
+        <li>{{firstName}} {{lastName}} [{{lastFive id}}]</li>
+    {{/each}}
+    </ul>
+    {{/if}}
 </script>
 
 <script src="js/libs/jquery-1.9.1.js"></script>
