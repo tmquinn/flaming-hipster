@@ -13,11 +13,15 @@ mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/flaming_hipster
 
 var collections = {};
 
-var Startup = collections.startups = mongoose.model('Startup', { time: Date });
-var Hipsters = collections.hipsters = mongoose.model('Hipsters', {
+/* Models */
+var Startup = mongoose.model('Startups', { time: Date });
+
+var Hipster =  mongoose.model('Hipsters', {
     firstName: String,
     lastName: String
 });
+
+var Accessories = mongoose
 
 var currentStartup = new Startup({ time: new Date() });
 currentStartup.save(function (err) {
@@ -30,13 +34,22 @@ server.use(restify.queryParser());
 server.get('/api/:version/:collection', function (request, response, next) {
     "use strict";
 
-    collections[request.params.collection].find(request.query, function (err, results) {
-        console.log('query', request.query, results);
+    //TODO: This should be procedural, not a switch statement?
+    var db, modelName;
+    switch (request.params.collection) {
+        case "hipsters":
+            db = Hipster;
+            modelName = 'hipster';
+            break;
 
-        var restResponse = {};
-        restResponse[request.params.collection] = results;
+        default:
+            response.send({ error: 'No such collect: ' + request.params.collection});
+    }
 
-        response.send(restResponse);
+    db.find(function (err, results) {
+        var body = {};
+        body[modelName] = results;
+        response.send(body);
     });
 
     return next();
@@ -56,8 +69,30 @@ server.get('/api/:version/:collection/:id', function (request, response, next) {
     return next();
 });
 
+server.put('/api/:version/:collection/:id', function (request, response, next) {
+    "use strict";
+
+    var db,
+        body = request.body;
+    switch (request.params.collection) {
+        case "hipsters":
+            db = Hipster;
+            body._id = request.params.id;
+            break;
+
+        default:
+            return false;
+    }
+
+    db.update(body);
+
+    response.send(body);
+
+    return next();
+});
+
 server.post('/api/:version/:collection', function (request, response, next) {
-    var newHipster = new Hipsters({
+    var newHipster = new Hipster({
         firstName: request.context.hipster.firstName,
         lastName: request.context.hipster.lastName
     });
