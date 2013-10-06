@@ -18,6 +18,7 @@
     <ul>
         <li>{{#linkTo "hipster.add"}}Add Hipster{{/linkTo}}</li>
         <li>{{#linkTo "hipster.find"}}Find Hipster{{/linkTo}}</li>
+        <li>{{#linkTo "hipster.edit" "5250c3284c62571405000002"}}Edit Hipster{{/linkTo}}</li>
     </ul>
 </script>
 
@@ -35,10 +36,16 @@
     <h2>Hipsters Found!</h2>
     <ul>
     {{#each searchResults}}
-        <li>{{firstName}} {{lastName}} [{{lastFive id}}]</li>
+        <li>{{firstName}} {{lastName}} [{{#linkTo "hipster.edit" id}}{{lastFive id}}{{/linkTo}}]</li>
     {{/each}}
     </ul>
     {{/if}}
+</script>
+
+<script type="text/x-handlebars" data-template-name="hipster/edit">
+    {{input valueBinding="firstName"}}
+    {{input valueBinding="lastName"}}
+    <button type="button" {{action "updateRecord"}}>Update</button>
 </script>
 
 <script src="js/libs/jquery-1.9.1.js"></script>

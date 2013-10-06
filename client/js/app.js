@@ -1,10 +1,12 @@
-/*globals require, Em, App:true */
+/*globals require, Em, DS, App:true */
 
 require.config({
     baseUrl: 'js/'
 });
 
 Em.Handlebars.helper('lastFive', function (value) {
+    "use strict";
+
     console.log(value);
 
     if (value.length > 10) {
@@ -26,16 +28,20 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 });
 
 App.Router.map(function () {
+    "use strict";
+
     this.resource('hipster', function () {
         this.route('add');
         this.route('find');
+        this.route('edit', { path: 'edit/:id'});
     });
 });
 
 require([
     'HipsterAddRoute',
     'HipsterFindController',
-    'HipsterFindView'
+    'HipsterFindView',
+    'HipsterEditRoute',
 ], function () {
     App.advanceReadiness();
 });

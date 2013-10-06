@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 
 var server = restify.createServer();
 
-mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/test');
+mongoose.connect(process.env.MONGOHQ_URL || 'mongodb://localhost/flaming_hipster');
 
 var collections = {};
 
@@ -38,6 +38,20 @@ server.get('/api/:version/:collection', function (request, response, next) {
 
         response.send(restResponse);
     });
+
+    return next();
+});
+
+server.get('/api/:version/:collection/:id', function (request, response, next) {
+    "use strict";
+
+    collections[request.params.collection].find(request.params.id,
+        function (err, results) {
+            var restResponse = {};
+            restResponse[request.params.collection] = results;
+
+            response.send(restResponse);
+        });
 
     return next();
 });
