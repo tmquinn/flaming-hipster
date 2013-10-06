@@ -10,6 +10,7 @@ define(['HipsterModel'], function () {
 
                 var foo = this.get('model');
                 foo.save();
+                this.set('model', this.get('store').createRecord('hipster'));
             }
         }
 
