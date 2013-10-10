@@ -21,8 +21,6 @@ var Hipster =  mongoose.model('Hipsters', {
     lastName: String
 });
 
-var Accessories = mongoose
-
 var currentStartup = new Startup({ time: new Date() });
 currentStartup.save(function (err) {
     console.log('Current Startup Time Saved');
