@@ -75,7 +75,7 @@ server.put('/api/:version/:collection/:id', function (request, response, next) {
     switch (request.params.collection) {
         case "hipsters":
             db = Hipster;
-            body._id = request.params.id;
+            body.hipster._id = request.params.id;
             break;
 
         default:

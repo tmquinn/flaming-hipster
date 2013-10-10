@@ -9,12 +9,10 @@ define(['HipsterModel'], function () {
                 Em.debug('Saving Hipster');
 
                 var foo = this.get('model');
-                foo.save();
-                this.set('model', this.get('store').createRecord('hipster'));
+                foo.save().then(function () {
+                    this.set('model', this.get('store').createRecord('hipster'));
+                });
             }
         }
-
-        /* Model Properties */
-
     });
 });
