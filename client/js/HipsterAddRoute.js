@@ -1,12 +1,15 @@
 /**
  * Created by quinn on 10/5/13.
  */
+/* globals define, Ember, App */
 
-define(['HipsterAddController'], function () {
-    App.HipsterAddRoute = Em.Route.extend({
-        model: function () {
-            console.log('Creating Model');
-            return this.get('store').createRecord('hipster');
-        }
-    });
+define(['HipsterAddController', 'HipsterModel'], function () {
+	"use strict";
+
+	App.HipsterAddRoute = Ember.Route.extend({
+		model: function () {
+			Ember.debug('HipsterAddRoute.model');
+			return this.get('store').createRecord('hipster');
+		}
+	});
 });

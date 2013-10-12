@@ -57,35 +57,49 @@ server.get('/api/:version/:collection', function (request, response, next) {
 server.get('/api/:version/:collection/:id', function (request, response, next) {
     "use strict";
 
-    collections[request.params.collection].find(request.params.id,
-        function (err, results) {
-            var restResponse = {};
-            restResponse[request.params.collection] = results;
+	var db, dbName;
+	switch (request.params.collection) {
+		case "hipsters":
+			db = Hipster;
+			dbName = 'hipster';
+			break;
+	}
 
-            response.send(restResponse);
-        });
+	db.find({_id: request.params.id}, function (err, result) {
+		var restResponse = {};
+		restResponse[dbName] = result;
+		response.send(restResponse);
+	});
 
     return next();
 });
 
 server.put('/api/:version/:collection/:id', function (request, response, next) {
     "use strict";
+	var id = request.params.id;
 
-    var db,
-        body = request.body;
+	// TODO: Proceduralize this
+    var db, dbName, body;
     switch (request.params.collection) {
         case "hipsters":
             db = Hipster;
-            body.hipster._id = request.params.id;
+			dbName = 'hipster';
             break;
 
         default:
             return false;
     }
 
-    db.update(body);
+	body = request.body[dbName];
 
-    response.send(body);
+	db.update({ _id: id }, body, {},
+		function(err, numberAffected, raw) {
+			db.find({ _id: id }, function (err, result) {
+				var rest = {};
+				rest[dbName] = result;
+				response.send(rest);
+			});
+		});
 
     return next();
 });

@@ -6,16 +6,14 @@
 define([
 	// Non - AMD
 	'HipsterController',
-	'HipsterModel'
-], function (util) {
+	'HipsterModel',
+
+	'HipsterViewRoute',
+	'HipsterFindRoute',
+	'HipsterEditRoute',
+	'HipsterAddRoute'
+], function () {
 	"use strict";
 
-	App.HipsterRoute = Ember.Route.extend({
-		model: function (params) {
-			switch (params.verb) {
-				case "add":
-					return this.store.createRecord('hipster');
-			}
-		}
-	});
+	App.HipsterRoute = Ember.Route.extend({});
 });

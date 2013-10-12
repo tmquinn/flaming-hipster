@@ -3,7 +3,7 @@
  */
 
 define([], function () {
-    App.Startup = DS.Model.extend({
-        time: DS.attr('date')
-    });
+	App.Startup = DS.Model.extend({
+		time: DS.attr('date')
+	});
 });

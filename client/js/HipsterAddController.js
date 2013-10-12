@@ -4,21 +4,20 @@
  * Created by quinn on 10/4/13.
  */
 define(['HipsterModel', 'AccessoryModel'], function () {
-    App.HipsterAddController = Ember.ObjectController.extend({
+	App.HipsterAddController = Ember.ObjectController.extend({
 
-        accessoryOptions: function () {
-            return this.get('store').find('accessory');
-        }.property(),
+		accessoryOptions: function () {
+			return this.get('store').find('accessory');
+		}.property(),
 
-        actions: {
-            createNewRecord: function () {
-                Ember.debug('Saving Hipster');
-
-                var foo = this.get('model');
-                foo.save().then(function () {
-                    this.set('model', this.get('store').createRecord('hipster'));
-                });
-            }
-        }
-    });
+		actions: {
+			buttonClick: function () {
+				Ember.debug('Saving Hipster');
+				this.get('model').save()
+					.then(function (result) {
+						this.transitionToRoute('hipster.view', result);
+					}.bind(this));
+			}
+		}
+	});
 });

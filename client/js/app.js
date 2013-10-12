@@ -1,4 +1,4 @@
-/*globals require, Ember, DS, App:true, console */
+/*globals require, Ember, DS, App:true */
 
 /**
  * Main
@@ -14,8 +14,6 @@ Ember.RSVP.configure('onerror', function (error) {
 
 Ember.Handlebars.helper('lastFive', function (value) {
 	"use strict";
-
-	console.log(value);
 
 	if (value.length > 10) {
 		value = [
@@ -43,21 +41,16 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 App.Router.map(function () {
 	"use strict";
 
-	console.log(this)
-
-	this.resource('hipster', { path: "/hipster/:verb" });
-
-//    this.resource('hipster', function () {
-//        this.route('add');
-//        this.route('find');
-//        this.route('edit', { path: 'edit/:id'});
-//    });
+	this.resource('hipster', function () {
+		this.route('add');
+		this.route('find');
+		this.route('view', { path: ':hipster_id' });
+		this.route('edit', { path: ':hipster_id/edit'});
+	});
 });
 
 require([
 	'HipsterRoute',
-	'HipsterFindController',
-	'HipsterFindView',
 ], function () {
 	"use strict";
 
