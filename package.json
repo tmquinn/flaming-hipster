@@ -12,5 +12,9 @@
   "dependencies": {
     "restify": "~2.6.0",
     "mongoose": "~3.6.20"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4"
   }
 }
