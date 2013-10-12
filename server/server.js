@@ -1,4 +1,4 @@
-/* globals require, process */
+/* globals require, process, console */
 
 /**
  * Created by quinn on 9/29/13.
@@ -23,6 +23,7 @@ var Hipster =  mongoose.model('Hipsters', {
 
 var currentStartup = new Startup({ time: new Date() });
 currentStartup.save(function (err) {
+    "use strict";
     console.log('Current Startup Time Saved');
 });
 
@@ -44,7 +45,7 @@ server.get('/api/:version/:collection', function (request, response, next) {
             response.send({ error: 'No such collect: ' + request.params.collection});
     }
 
-    db.find(function (err, results) {
+    db.find(request.query, function (err, results) {
         var body = {};
         body[modelName] = results;
         response.send(body);
@@ -90,6 +91,7 @@ server.put('/api/:version/:collection/:id', function (request, response, next) {
 });
 
 server.post('/api/:version/:collection', function (request, response, next) {
+    "use strict";
     var newHipster = new Hipster({
         firstName: request.context.hipster.firstName,
         lastName: request.context.hipster.lastName
@@ -111,5 +113,6 @@ server.get(/\/?.*/, restify.serveStatic({
 
 
 server.listen(process.env.PORT || 8080, function () {
+    "use strict";
     console.log('%s listening at %s', server.name, server.url);
 });
