@@ -2,3 +2,7 @@
 html, body {
     margin: 20px;
 }
+
+div {
+    margin: 5px 0;
+}

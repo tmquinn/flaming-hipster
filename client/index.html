@@ -21,11 +21,16 @@
     </ul>
 </script>
 
-<script type="text/x-handlebars" data-template-name="hipster/add">
-    <h2>Add Hipster</h2>
-    {{input placeholder="First Name" valueBinding="firstName"}}
-    {{input placeholder="Last Name" valueBinding="lastName"}}
-    <button type="button" {{action "createNewRecord"}}>Create</button>
+<script type="text/x-handlebars" data-template-name="hipster">
+    <h2>{{verbTitle}} Hipster</h2>
+    <div>
+        {{input placeholder="First Name" valueBinding="firstName"}}
+        {{input placeholder="Last Name" valueBinding="lastName"}}
+    </div>
+    <div>
+        {{view Em.Select contentBinding="accessoryOptions" multiple="multiple" optionLabelPath="content.name" optionValuePath="content.id" selectionBinding="accessories"}}
+    </div>
+    <button type="button" {{action "processRecord"}}>{{verbAction}}</button>
 </script>
 
 <script type="text/x-handlebars" data-template-name="hipster/find">
@@ -41,13 +46,6 @@
     {{/each}}
     </ul>
     {{/if}}
-</script>
-
-<script type="text/x-handlebars" data-template-name="hipster/edit">
-    <h2>Edit Hipster</h2>
-    {{input valueBinding="firstName"}}
-    {{input valueBinding="lastName"}}
-    <button type="button" {{action "updateRecord"}}>Update</button>
 </script>
 
 <script src="js/libs/jquery-1.9.1.js"></script>
