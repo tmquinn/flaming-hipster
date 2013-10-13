@@ -1,8 +1,14 @@
 /* Put your CSS here */
 html, body {
-    margin: 20px;
+    margin: 5px;
 }
 
 div {
     margin: 5px 0;
+}
+
+#nav, #main {
+    display: inline-block;
+    padding: 5px;
+    vertical-align: top;
 }
