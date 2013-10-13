@@ -2,11 +2,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Flaming Hipster</title>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/style.css">
+	<title>QUnit Example</title>
+	<link rel="stylesheet" href="../node_modules/grunt-contrib-qunit/test/libs/qunit.css">
 </head>
 <body>
+<div id="ember-app"></div>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
 
 <script type="text/x-handlebars">
 	<nav id="nav">
@@ -73,11 +75,10 @@
 	</ul>
 	{{/if}}
 </script>
-
-<script src="js/libs/jquery-1.9.1.js"></script>
-<script src="js/libs/handlebars-1.0.0.js"></script>
-<script src="js/libs/ember-1.0.0.js"></script>
-<script src="js/libs/ember-data.js"></script>
-<script src="js/libs/require.js" data-main="js/app.js"></script>
-</body>
+<script src="../client/js/libs/jquery-1.9.1.js"></script>
+<script src="../client/js/libs/handlebars-1.0.0.js"></script>
+<script src="../client/js/libs/ember-1.0.0.js"></script>
+<script src="../client/js/libs/ember-data.js"></script>
+<script src="../node_modules/grunt-contrib-qunit/test/libs/qunit.js"></script>
+<script src="../client/js/libs/require.js" data-main="tests.js"></script></body>
 </html>

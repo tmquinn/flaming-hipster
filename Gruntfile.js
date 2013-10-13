@@ -24,11 +24,16 @@ module.exports = function(grunt) {
 					norecurse: true
 				}
 			}
+		},
+
+		qunit: {
+			all: ['test/test.html']
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
+	grunt.loadNpmTasks('grunt-contrib-qunit');
 
 	grunt.registerTask('default', ['jshint']);
 
