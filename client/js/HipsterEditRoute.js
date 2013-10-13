@@ -1,7 +1,16 @@
 /**
  * Created by quinn on 10/5/13.
  */
+/* globals define, App, Ember */
 define(['HipsterEditController'],
 	function () {
-		App.HipsterEditRoute = Em.Route.extend({});
+		"use strict";
+
+		/**
+		 * Hipster / Edit Route (unimplemented)
+		 *
+		 * @class HipsterEditRoute
+		 * @extends Ember.Route
+		 */
+//		App.HipsterEditRoute = Ember.Route.extend();
 	});

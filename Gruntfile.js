@@ -6,11 +6,28 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		jshint: {
-			all: ['client/js/*.js', 'server/*.js']
+			all: ['client/js/*.js', 'server/*.js'],
+			options: {
+				strict: true
+			}
+		},
+
+		yuidoc: {
+			compile: {
+				name: '<%= pkg.name %>',
+				description: '<%= pkg.description %>',
+				version: '<%= pkg.version %>',
+				options: {
+					paths: 'client/js',
+					outdir: 'docs',
+					norecurse: true
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
 	grunt.registerTask('default', ['jshint']);
 
