@@ -4,7 +4,11 @@
  * Main
  */
 require.config({
-	baseUrl: 'js/'
+	baseUrl: 'js/',
+
+	paths: {
+		lgtm: 'libs/lgtm'
+	}
 });
 
 Ember.RSVP.configure('onerror', function (error) {
@@ -49,9 +53,7 @@ App.Router.map(function () {
 	});
 });
 
-require([
-	'HipsterRoute',
-], function () {
+require(['HipsterRoute'], function () {
 	"use strict";
 
 	App.advanceReadiness();

@@ -8,7 +8,8 @@ module.exports = function(grunt) {
 		jshint: {
 			all: ['client/js/*.js', 'server/*.js'],
 			options: {
-				strict: true
+				strict: true,
+				undef: true
 			}
 		},
 
