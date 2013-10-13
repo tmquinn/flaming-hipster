@@ -3,6 +3,5 @@
 	{{input disabledBinding="isDisabled" placeholder="Last Name" valueBinding="lastName"}}
 </div>
 <div>
-	{{view Em.Select contentBinding="accessoryOptions" multiple="multiple" optionLabelPath="content.name"
-	optionValuePath="content.id" selectionBinding="accessories"}}
+	{{view Em.Select contentBinding="accessoryOptions" optionLabelPath="content.name" selectionBinding="accessories"}}
 </div>

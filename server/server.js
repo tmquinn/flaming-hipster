@@ -21,6 +21,10 @@ var Hipster =  mongoose.model('Hipsters', {
     lastName: String
 });
 
+var Accessory = mongoose.model('Accessories', {
+	name: String
+});
+
 var currentStartup = new Startup({ time: new Date() });
 currentStartup.save(function (err) {
     "use strict";
@@ -40,6 +44,11 @@ server.get('/api/:version/:collection', function (request, response, next) {
             db = Hipster;
             modelName = 'hipster';
             break;
+
+		case "accessories":
+			db = Accessory;
+			modelName = 'accessory'
+			break;
 
         default:
             response.send({ error: 'No such collect: ' + request.params.collection});

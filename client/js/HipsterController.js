@@ -7,5 +7,6 @@
 define([], function () {
 	"use strict";
 
-	App.HipsterController = Ember.ObjectController.extend({});
+	App.HipsterController = Ember.ObjectController.extend({
+	});
 });

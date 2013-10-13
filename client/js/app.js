@@ -1,5 +1,7 @@
 /*globals require, Ember, DS, App:true */
 
+var DEBUG = true; // TODO: Set by env
+
 /**
  * Main
  */
@@ -38,6 +40,14 @@ App = Ember.Application.create({
 });
 App.deferReadiness();
 
+App.ApplicationSerializer = DS.RESTSerializer.extend({
+	primaryKey: '_id',
+
+	serializeHasMany: function(record, json, relationship) {
+		console.log(record, json, relationship);
+	}
+});
+
 App.ApplicationAdapter = DS.RESTAdapter.extend({
 	namespace: 'api/v1'
 });
@@ -53,8 +63,36 @@ App.Router.map(function () {
 	});
 });
 
-require(['templates', 'HipsterRoute'], function () {
-	"use strict";
+//TODO: Make better
+if (DEBUG) {
+	var templates = [
+		'hipster/add',
+		'hipster/edit',
+		'hipster/find',
+		'hipster/view',
+		'application',
+		'partialHipster'
+	];
 
-	App.advanceReadiness();
-});
+	Ember.TEMPLATES = Ember.TEMPLATES || [];
+
+	templates.forEach(function (template) {
+		$.ajax('hbs/' + template + '.hbs', 'GET')
+			.then(function (result) {
+				Ember.TEMPLATES[template] = Ember.Handlebars.compile(result);
+			});
+	});
+
+	require(['HipsterRoute'], function () {
+		"use strict";
+
+		App.advanceReadiness();
+	});
+} else {
+	require(['templates', 'HipsterRoute'], function () {
+		"use strict";
+
+		App.advanceReadiness();
+	});
+}
+

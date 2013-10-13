@@ -7,23 +7,6 @@ define([], function () {
 	"use strict";
 
 	/**
-	 * The Serializer for the Hipster Model
-	 *
-	 * @class HipsterSerializer
-	 * @extends DS.RESTSerializer
-	 */
-	App.HipsterSerializer = DS.RESTSerializer.extend({
-		/**
-		 * Indicates primary key in payload
-		 *
-		 * @property primaryKey
-		 * @type {String}
-		 * @default _id
-		 */
-		primaryKey: '_id'
-	});
-
-	/**
 	 *
 	 * The Hipster Model
 	 *
@@ -38,13 +21,18 @@ define([], function () {
 		 * @type {String}
 		 */
 		firstName: DS.attr('string'),
+
 		/**
 		 * The Hipster's last name
 		 *
 		 * @property lastName
 		 * @type {String}
 		 */
-		lastName: DS.attr('string')//,
-//        accessories: DS.hasMany('accessory')
+		lastName: DS.attr('string'),
+
+		/**
+		 * The Hipster's accessories
+		 */
+        accessories: DS.belongsTo('accessory')
 	});
 });

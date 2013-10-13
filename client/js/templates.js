@@ -77,13 +77,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   },contexts:[],types:[],hashContexts:hashContexts,hashTypes:hashTypes,data:data};
   data.buffer.push(escapeExpression(((stack1 = helpers.input || depth0.input),stack1 ? stack1.call(depth0, options) : helperMissing.call(depth0, "input", options))));
   data.buffer.push("\n</div>\n<div>\n	");
-  hashContexts = {'contentBinding': depth0,'multiple': depth0,'optionLabelPath': depth0,'optionValuePath': depth0,'selectionBinding': depth0};
-  hashTypes = {'contentBinding': "STRING",'multiple': "STRING",'optionLabelPath': "STRING",'optionValuePath': "STRING",'selectionBinding': "STRING"};
+  hashContexts = {'contentBinding': depth0,'optionLabelPath': depth0,'selectionBinding': depth0};
+  hashTypes = {'contentBinding': "STRING",'optionLabelPath': "STRING",'selectionBinding': "STRING"};
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "Em.Select", {hash:{
     'contentBinding': ("accessoryOptions"),
-    'multiple': ("multiple"),
     'optionLabelPath': ("content.name"),
-    'optionValuePath': ("content.id"),
     'selectionBinding': ("accessories")
   },contexts:[depth0],types:["ID"],hashContexts:hashContexts,hashTypes:hashTypes,data:data})));
   data.buffer.push("\n</div>\n");

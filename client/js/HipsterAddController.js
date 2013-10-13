@@ -13,6 +13,12 @@ define(['HipsterModel', 'AccessoryModel'], function () {
 	 * @extends Ember.ObjectController
 	 */
 	App.HipsterAddController = Ember.ObjectController.extend({
+
+		foo: function (key, value) {
+			console.log(key, value);
+			this.set('model.accessories', value);
+		}.property(),
+
 		/**
 		 * Returns all Accessory Model records
 		 *
