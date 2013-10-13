@@ -53,7 +53,7 @@ App.Router.map(function () {
 	});
 });
 
-require(['HipsterRoute'], function () {
+require(['templates', 'HipsterRoute'], function () {
 	"use strict";
 
 	App.advanceReadiness();

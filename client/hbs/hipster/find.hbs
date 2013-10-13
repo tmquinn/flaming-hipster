@@ -1,0 +1,16 @@
+<h2>Find Hipster</h2>
+
+<div>Leave fields blank to Find All</div>
+<div>
+	{{input placeholder="First Name" valueBinding="firstName" id="first-name"}}
+	{{input placeholder="Last Name" valueBinding="lastName"}}
+	<button type="button" {{action "findHipsters"}}>Find</button>
+</div>
+{{#if searchResults}}
+	<h2>Hipsters Found!</h2>
+	<ul>
+		{{#each searchResults}}
+			<li>{{firstName}} {{lastName}} [{{#linkTo "hipster.view" id}}{{lastFive id}}{{/linkTo}}]</li>
+		{{/each}}
+	</ul>
+{{/if}}

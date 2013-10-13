@@ -28,12 +28,25 @@ module.exports = function(grunt) {
 
 		qunit: {
 			all: ['test/test.html']
+		},
+
+		emberTemplates: {
+			default: {
+				files: {
+					"client/js/templates.js": ['client/hbs/*.hbs', 'client/hbs/hipster/*.hbs']
+				},
+				options: {
+					precompile: true,
+					templateBasePath: /client\/hbs\//
+				}
+			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-yuidoc');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
+	grunt.loadNpmTasks('grunt-ember-templates');
 
 	grunt.registerTask('default', ['jshint']);
 
