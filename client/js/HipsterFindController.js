@@ -1,11 +1,14 @@
-/* globals define, App, Em */
+/* globals define, App, Ember */
 /**
  * Created by quinn on 10/5/13.
  */
 define([], function () {
 	"use strict";
 
-	App.HipsterFindController = Em.Controller.extend({
+	App.HipsterFindController = Ember.ArrayController.extend({
+
+		sortProperties: ['firstName', 'lastName'],
+
 		actions: {
 			findHipsters: function () {
 				var query = {},
@@ -19,9 +22,10 @@ define([], function () {
 					};
 				}
 
-				this.get('store').find('hipster', query).then(function (results) {
-					this.set('searchResults', results);
-				}.bind(this));
+				this.get('store').find('hipster', query)
+					.then(function (results) {
+						this.set('model', results);
+					}.bind(this));
 			}
 		}
 	});

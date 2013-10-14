@@ -64,6 +64,7 @@ App.Router.map(function () {
 });
 
 //TODO: Make better
+var mainDeps = ['HipsterRoute'];
 if (DEBUG) {
 	var templates = [
 		'hipster/add',
@@ -83,16 +84,13 @@ if (DEBUG) {
 			});
 	});
 
-	require(['HipsterRoute'], function () {
-		"use strict";
-
-		App.advanceReadiness();
-	});
 } else {
-	require(['templates', 'HipsterRoute'], function () {
-		"use strict";
-
-		App.advanceReadiness();
-	});
+	mainDeps.push('templates');
 }
+
+require(mainDeps, function () {
+	"use strict";
+
+	App.advanceReadiness();
+});
 

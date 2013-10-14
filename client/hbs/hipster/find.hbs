@@ -6,10 +6,10 @@
 	{{input placeholder="Last Name" valueBinding="lastName"}}
 	<button type="button" {{action "findHipsters"}}>Find</button>
 </div>
-{{#if searchResults}}
+{{#if model}}
 	<h2>Hipsters Found!</h2>
 	<ul>
-		{{#each searchResults}}
+		{{#each}}
 			<li>{{firstName}} {{lastName}} [{{#linkTo "hipster.view" id}}{{lastFive id}}{{/linkTo}}]</li>
 		{{/each}}
 	</ul>
