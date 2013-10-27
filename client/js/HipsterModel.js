@@ -28,11 +28,11 @@ define([], function () {
 		 * @property lastName
 		 * @type {String}
 		 */
-		lastName: DS.attr('string'),
+		lastName: DS.attr('string')
 
 		/**
 		 * The Hipster's accessories
 		 */
-        accessories: DS.belongsTo('accessory')
+//        accessories: DS.belongsTo('accessory')
 	});
 });

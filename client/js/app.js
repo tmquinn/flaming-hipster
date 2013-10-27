@@ -15,7 +15,8 @@ require.config({
 
 Ember.RSVP.configure('onerror', function (error) {
 	"use strict";
-	Ember.Logger.assert(false, error);
+	console.assert(false, error.message);
+	console.error(error);
 });
 
 Ember.Handlebars.helper('lastFive', function (value) {
