@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 		jshint: {
 			all: ['client/js/*.js', 'server/*.js'],
 			options: {
+				ignores: ['client/js/templates.js'],
 				strict: true,
 				undef: true
 			}
