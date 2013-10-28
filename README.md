@@ -1,7 +1,7 @@
 flaming-hipster
 ===============
 
-Learning exercise on implementing Ember's DS.RESTFulAdapter in default mode as well as customized.
+Learning exercise on implementing Ember's DS.RESTAdapter in default mode as well as customized.
 ### Installation
 
 This is set up to be a Heroku deployment with MongoHQ add-on
